@@ -25,6 +25,8 @@ namespace DependencyInject
     /// </summary>
     class ClassC : IClassC
     {
+        public int id;
+        
         public ClassC() => Console.WriteLine("ClassC is created!");
 
         public void AcitonC() => Console.WriteLine("Action in ClassC");
@@ -207,7 +209,7 @@ namespace DependencyInject
             services.AddSingleton<MyService>();
             services.Configure<MyServiceOptions>((options) =>
             {
-                options.data1 = "Hello";
+                options.data1 = "Welcome to";
                 options.data2 = 2022;
             });
 
@@ -217,6 +219,21 @@ namespace DependencyInject
             // Get Services
             var myService = provider.GetService<MyService>();
             myService.PrintData();
+
+            //var classC = new ClassC();
+            //var classC_1 = classC;
+            //classC_1.id = 1;
+            //Console.WriteLine("Id classC: " + classC.id);
+            //Console.WriteLine("Id classC_1: " + classC_1.id);
+            //Console.WriteLine(classC.GetHashCode());
+            //Console.WriteLine(classC_1.GetHashCode());
+
+            //classC = new ClassC();
+            //classC.id = 2;
+            //Console.WriteLine("_Id classC: " + classC.id);
+            //Console.WriteLine("_Id classC_1: " + classC_1.id);
+            //Console.WriteLine(classC.GetHashCode());
+            //Console.WriteLine(classC_1.GetHashCode());
         }
     }
 }
