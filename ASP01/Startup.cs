@@ -26,15 +26,25 @@ namespace ASP01
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<TestOptionsMiddleware>();
+            //services.AddTransient<TestOptionsMiddleware>();
 
-            services.AddSingleton<ProductNames>();
+            //services.AddSingleton<ProductNames>();
 
-            services.AddOptions();
+            //services.AddOptions();
 
-            var testOptions = _configuration.GetSection("TestOptions");
+            //var testOptions = _configuration.GetSection("TestOptions");
 
-            services.Configure<TestOptions>(testOptions);
+            //services.Configure<TestOptions>(testOptions);
+
+            services.AddDistributedMemoryCache();
+
+            services.AddSession((option) =>
+            {
+                option.Cookie.Name = "TestSession";
+                option.IdleTimeout = new TimeSpan(0, 30, 0);
+            });
+
+            // dotnet sql-cache create "Data Source = SM116\MSSQL_SERVER;Initial Catalog = webdb;User ID = sa;Password = 123" dbo Session
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,7 +55,9 @@ namespace ASP01
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMiddleware<TestOptionsMiddleware>();
+            app.UseSession();
+
+            //app.UseMiddleware<TestOptionsMiddleware>();
 
             app.UseRouting();
 
@@ -53,7 +65,35 @@ namespace ASP01
             {
                 endpoints.MapGet("/", async context =>
                 {
+                    int? count;
+
+                    count = context.Session.GetInt32("count");
+
+                    if (count == null)
+                    {
+                        count = 0;
+                    }
+
+                    await context.Response.WriteAsync($"So lan truy cap rwsession: {count.Value}\n");
+                    
                     await context.Response.WriteAsync("Hello World!");
+                });
+
+                endpoints.MapGet("/rwsession", async (context) =>
+                {
+                    int? count;
+
+                    count = context.Session.GetInt32("count");
+
+                    if (count == null)
+                    {
+                        count = 0;
+                    }
+
+                    count += 1;
+                    context.Session.SetInt32("count", count.Value);
+
+                    await context.Response.WriteAsync($"So lan truy cap rwsession: {count.Value}");
                 });
 
                 endpoints.MapGet("/ShowOptions", async (context) =>
