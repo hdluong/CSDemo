@@ -36,7 +36,13 @@ namespace ASP01
 
             //services.Configure<TestOptions>(testOptions);
 
-            services.AddDistributedMemoryCache();
+            //services.AddDistributedMemoryCache();
+            services.AddDistributedSqlServerCache(option =>
+            {
+                option.ConnectionString = @"Data Source = SM116\MSSQL_SERVER;Initial Catalog = webdb;User ID = sa;Password = 123";
+                option.SchemaName = "dbo";
+                option.TableName = "Session";
+            });
 
             services.AddSession((option) =>
             {
