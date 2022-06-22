@@ -7,11 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DependencyInject", "Depende
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EF", "EF\EF.csproj", "{9DB94CC9-3495-4821-8268-99EAA8EF4B91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigrationEx", "MigrationEx\MigrationEx.csproj", "{63A668F3-2174-4451-A391-6910EB0F0E9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MigrationEx", "MigrationEx\MigrationEx.csproj", "{63A668F3-2174-4451-A391-6910EB0F0E9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestScaffold", "TestScaffold\TestScaffold.csproj", "{324767DF-640D-4AD9-B5C9-64388C7CBB98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestScaffold", "TestScaffold\TestScaffold.csproj", "{324767DF-640D-4AD9-B5C9-64388C7CBB98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hello-ASP", "Hello-ASP\Hello-ASP.csproj", "{910ACA4E-C79B-41EF-89D3-9CCD8FF1DE1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hello-ASP", "Hello-ASP\Hello-ASP.csproj", "{910ACA4E-C79B-41EF-89D3-9CCD8FF1DE1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP01", "ASP01\ASP01.csproj", "{F8E0AD4B-DE23-47FD-9670-357BECD92740}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{910ACA4E-C79B-41EF-89D3-9CCD8FF1DE1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{910ACA4E-C79B-41EF-89D3-9CCD8FF1DE1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{910ACA4E-C79B-41EF-89D3-9CCD8FF1DE1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8E0AD4B-DE23-47FD-9670-357BECD92740}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8E0AD4B-DE23-47FD-9670-357BECD92740}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8E0AD4B-DE23-47FD-9670-357BECD92740}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8E0AD4B-DE23-47FD-9670-357BECD92740}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

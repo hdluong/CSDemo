@@ -219,21 +219,6 @@ namespace DependencyInject
             // Get Services
             var myService = provider.GetService<MyService>();
             myService.PrintData();
-
-            //var classC = new ClassC();
-            //var classC_1 = classC;
-            //classC_1.id = 1;
-            //Console.WriteLine("Id classC: " + classC.id);
-            //Console.WriteLine("Id classC_1: " + classC_1.id);
-            //Console.WriteLine(classC.GetHashCode());
-            //Console.WriteLine(classC_1.GetHashCode());
-
-            //classC = new ClassC();
-            //classC.id = 2;
-            //Console.WriteLine("_Id classC: " + classC.id);
-            //Console.WriteLine("_Id classC_1: " + classC_1.id);
-            //Console.WriteLine(classC.GetHashCode());
-            //Console.WriteLine(classC_1.GetHashCode());
         }
     }
 }
