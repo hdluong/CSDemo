@@ -13,7 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestScaffold", "TestScaffol
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hello-ASP", "Hello-ASP\Hello-ASP.csproj", "{910ACA4E-C79B-41EF-89D3-9CCD8FF1DE1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP01", "ASP01\ASP01.csproj", "{F8E0AD4B-DE23-47FD-9670-357BECD92740}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASP01", "ASP01\ASP01.csproj", "{F8E0AD4B-DE23-47FD-9670-357BECD92740}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asp-Razor01", "Asp-Razor01\Asp-Razor01.csproj", "{B25E4303-A564-49B7-B505-648D0790E6FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeetCode", "LeetCode\LeetCode.csproj", "{0BA488BE-1AE1-4D8E-8DD3-B3D4655C7AC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{F8E0AD4B-DE23-47FD-9670-357BECD92740}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8E0AD4B-DE23-47FD-9670-357BECD92740}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8E0AD4B-DE23-47FD-9670-357BECD92740}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B25E4303-A564-49B7-B505-648D0790E6FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B25E4303-A564-49B7-B505-648D0790E6FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B25E4303-A564-49B7-B505-648D0790E6FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B25E4303-A564-49B7-B505-648D0790E6FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BA488BE-1AE1-4D8E-8DD3-B3D4655C7AC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BA488BE-1AE1-4D8E-8DD3-B3D4655C7AC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BA488BE-1AE1-4D8E-8DD3-B3D4655C7AC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BA488BE-1AE1-4D8E-8DD3-B3D4655C7AC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
