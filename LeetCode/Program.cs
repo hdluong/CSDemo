@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace LeetCode
 {
@@ -82,9 +83,38 @@ namespace LeetCode
             return result;
         }
 
+        public static string LongestCommonPrefix(string[] strs)
+        {
+            if (strs.Length == 1)
+            {
+                return strs[0];
+            }
+
+            if (string.IsNullOrEmpty(strs[0]))
+            {
+                return string.Empty;
+            }
+
+            string longestPrefix = strs[0];
+            
+            for (int i = 1; i < strs.Length; i++)
+            {
+                while (!strs[i].StartsWith(longestPrefix))
+                {
+                    longestPrefix = longestPrefix.Substring(0, longestPrefix.Length - 1);
+                    if (string.IsNullOrEmpty(longestPrefix))
+                    {
+                        return longestPrefix;
+                    }
+                }
+            }
+
+            return longestPrefix;
+        }
+        
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            
         }
     }
 }
