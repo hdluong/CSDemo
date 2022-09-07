@@ -278,6 +278,29 @@ namespace LeetCode
             }
         }
 
+        public static void DuplicateZeros1(int[] arr)
+        {
+            var queue = new Queue<int>();
+            int i = 0;
+
+            while (i < arr.Length)
+            {
+                if (arr[i] == 0)
+                {
+                    queue.Enqueue(0);
+                    queue.Enqueue(0);
+                }
+                else
+                {
+                    queue.Enqueue(arr[i]);
+                }
+
+                arr[i] = queue.Dequeue();
+                i++;
+            }
+
+        }
+
         /*
          * 88. Merge Sorted Array
          * Input: nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
@@ -312,6 +335,53 @@ namespace LeetCode
                     nums1[k--] = nums2[j--];
                 }
             }
+        }
+
+        /// <summary>
+        /// 27. Remove Element
+        /// Input: nums = [0,1,2,2,3,0,4,2], val = 2
+        /// Output: 5, nums = [0,1,4,0,3, _, _, _]
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <param name="val"></param>
+        /// <returns></returns>
+        public static int RemoveElement(int[] nums, int val)
+        {
+            var j = 0;
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] != val)
+                {
+                    nums[j++] = nums[i];
+                }
+            }
+
+            return j;
+        }
+
+        /// <summary>
+        /// 26. Remove Duplicates from Sorted Array
+        /// Input: nums = [0,0,1,1,1,2,2,3,3,4]
+        /// Output: 5, nums = [0,1,2,3,4, _, _, _, _, _]
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static int RemoveDuplicates(int[] nums)
+        {
+            var j = 1;
+            var val = nums[0];
+
+            for (int i = 1; i < nums.Length; i++)
+            {
+                if (nums[i] != val)
+                {
+                    nums[j++] = nums[i];
+                    val = nums[i];
+                }
+            }
+
+            return j;
         }
         #endregion
 
@@ -393,9 +463,11 @@ namespace LeetCode
 
         static void Main(string[] args)
         {
-            var array = new int[] { 64, 25, 12, 22, 11, 12, 70, 10 };
+            //var array = new int[] { 1, 0, 0, 2, 3, 4, 0, 5, 0 };
+            var array = new int[] { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4 };
 
-            InsertionSort(array);
+            int k = RemoveDuplicates(array);
+            Console.WriteLine($"num of elements: {k}");
 
             PrintArray(array);
         }
