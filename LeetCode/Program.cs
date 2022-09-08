@@ -383,6 +383,28 @@ namespace LeetCode
 
             return j;
         }
+
+        /// <summary>
+        /// 1346. Check If N and Its Double Exist
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <returns></returns>
+        public static bool CheckIfExist(int[] arr)
+        {
+            var idxMap = new SortedList<int, int>();
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (idxMap.ContainsKey(2*arr[i]) || (arr[i]%2 == 0 && idxMap.ContainsKey(arr[i]/2)))
+                {
+                    return true;
+                }
+
+                idxMap[arr[i]] = i;
+            }
+
+            return false;
+        }
         #endregion
 
         #region Recursion
@@ -463,13 +485,10 @@ namespace LeetCode
 
         static void Main(string[] args)
         {
-            //var array = new int[] { 1, 0, 0, 2, 3, 4, 0, 5, 0 };
-            var array = new int[] { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4 };
+            var array = new int[] { 3, 1, 7, 11 };
 
-            int k = RemoveDuplicates(array);
-            Console.WriteLine($"num of elements: {k}");
-
-            PrintArray(array);
+            var isExist = CheckIfExist(array);
+            Console.WriteLine(isExist);
         }
     }
 }
