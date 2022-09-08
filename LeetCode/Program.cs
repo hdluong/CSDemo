@@ -485,6 +485,31 @@ namespace LeetCode
 
             return true;
         }
+
+        /// <summary>
+        /// 1299. Replace Elements with Greatest Element on Right Side
+        /// Input: arr = [17,18,5,4,6,1]
+        /// Output: [18,6,6,6,1,-1]
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <returns></returns>
+        public static int[] ReplaceElements(int[] arr)
+        {
+            var n = arr.Length;
+            var max = arr[n - 1];
+            arr[n - 1] = -1;
+            for (int i = n - 2; i >= 0; i--)
+            {
+                var tmp = arr[i];
+                arr[i] = max;
+                if (tmp > max)
+                {
+                    max = tmp;
+                }
+            }
+
+            return arr;
+        }
         #endregion
 
         #region Recursion
@@ -565,10 +590,11 @@ namespace LeetCode
 
         static void Main(string[] args)
         {
-            var array = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            var array = new int[] { 400 };
 
-            var isExist = ValidMountainArray(array);
-            Console.WriteLine(isExist);
+            ReplaceElements(array);
+
+            PrintArray(array);
         }
     }
 }
