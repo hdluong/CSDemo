@@ -405,6 +405,86 @@ namespace LeetCode
 
             return false;
         }
+
+        /// <summary>
+        /// 941. Valid Mountain Array
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <returns></returns>
+        public static bool ValidMountainArray(int[] arr)
+        {
+            if (arr.Length < 3)
+            {
+                return false;
+            }
+
+            int k = 0;
+            for (int i = 0; i < arr.Length - 1; i++)
+            {
+                k = i;
+
+                if (arr[i] == arr[i+1])
+                {
+                    return false;
+                }
+
+                if (arr[i] > arr[i+1])
+                {
+                    if (i == 0)
+                    {
+                        return false;
+                    }
+                    break;
+                }
+            }
+
+            for (int j = arr.Length - 1; j > k; j--)
+            {
+                if (arr[j] >= arr[j-1])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public static bool ValidMountainArray1(int[] arr)
+        {
+            if (arr.Length < 3)
+            {
+                return false;
+            }
+
+            int i = 0;
+            for (; i < arr.Length - 1; i++)
+            {
+                if (arr[i] == arr[i + 1])
+                {
+                    return false;
+                }
+
+                if (arr[i] > arr[i + 1])
+                {
+                    break;
+                }
+            }
+
+            if (i == 0 || i == arr.Length - 1)
+            {
+                return false;
+            }
+
+            for (int j = i; j < arr.Length - 1; j++)
+            {
+                if (arr[j] <= arr[j+1])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
         #endregion
 
         #region Recursion
@@ -485,9 +565,9 @@ namespace LeetCode
 
         static void Main(string[] args)
         {
-            var array = new int[] { 3, 1, 7, 11 };
+            var array = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-            var isExist = CheckIfExist(array);
+            var isExist = ValidMountainArray(array);
             Console.WriteLine(isExist);
         }
     }
