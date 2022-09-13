@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
@@ -579,6 +580,102 @@ namespace LeetCode
 
             return nums;
         }
+
+        /// <summary>
+        /// Input: heights = [1,1,4,2,1,3]
+        /// Output: 3
+        /// Explanation: 
+        /// heights:  [1,1,4,2,1,3]
+        /// expected: [1,1,1,2,3,4]
+        /// Indices 2, 4, and 5 do not match.
+        /// </summary>
+        /// <param name="heights"></param>
+        /// <returns></returns>
+        public int HeightChecker(int[] heights)
+        {
+            var n = heights.Length;
+            var count = 0;
+            var expected = new int[n];
+            Array.Copy(heights, expected, n);
+            Array.Sort(expected);
+
+            for (int i = 0; i < n; i++)
+            {
+                if (heights[i] != expected[i])
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
+        public static int ThirdMax(int[] nums)
+        {
+            int n = nums.Length;
+
+            int? max1 = null;
+            int? max2 = null;
+            int? max3 = null;
+
+            for (int i = 0; i < n; i++)
+            {
+                if (max1 == nums[i] || max2 == nums[i] || max3 == nums[i])
+                {
+                    continue;
+                }
+
+                if (max1 == null || nums[i] > max1)
+                {
+                    max3 = max2;
+                    max2 = max1;
+                    max1 = nums[i];
+                }
+                else if (max2 == null || nums[i] > max2)
+                {
+                    max3 = max2;
+                    max2 = nums[i];
+                }
+                else if (max3 == null || nums[i] > max3)
+                {
+                    max3 = nums[i];
+                }
+            }
+
+            if (max3 == null)
+            {
+                return max1.Value;
+            }
+
+            return max3.Value;
+        }
+
+
+        /// <summary>
+        /// Input: nums = [4,3,2,7,8,2,3,1]
+        /// Output: [5,6]
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static IList<int> FindDisappearedNumbers(int[] nums)
+        {
+            var result = new SortedList<int, bool>();
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                result[i + 1] = true;
+            }
+
+            foreach (int x in nums)
+            {
+                if (result.ContainsKey(x))
+                {
+                    result.Remove(x);
+                }
+            }
+
+            return result.Keys;
+        }
         #endregion
 
         #region Recursion
@@ -659,11 +756,13 @@ namespace LeetCode
 
         static void Main(string[] args)
         {
-            var array = new int[] { 0, 1 };
+            var array = new int[] { 1, 1 };
 
-            array = SortArrayByParity(array);
+            var result = FindDisappearedNumbers(array);
 
-            PrintArray(array);
+            PrintArray(result.ToArray());
+
+            //Console.WriteLine(ThirdMax(array));
         }
     }
 }
