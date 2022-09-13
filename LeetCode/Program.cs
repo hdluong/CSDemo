@@ -510,6 +510,75 @@ namespace LeetCode
 
             return arr;
         }
+
+        /// <summary>
+        /// 
+        /// Input: nums = [0,1,0,3,12]
+        /// Output: [1,3,12,0,0]
+        /// </summary>
+        /// <param name="nums"></param>
+        public static void MoveZeroes(int[] nums)
+        {
+            int n = nums.Length;
+            int j = 0;
+            for (int i = 0; i < n; i++)
+            {
+                if (nums[i] != 0)
+                {
+                    nums[j++] = nums[i];
+                }
+            }
+
+            for (int k = j; k < n; k++)
+            {
+                nums[k] = 0;
+            }
+        }
+
+        /// <summary>
+        /// Input: nums = [3,1,2,4]
+        /// Output: [2,4,3,1]
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static int[] SortArrayByParity(int[] nums)
+        {
+            int n = nums.Length;
+            int i = 0;
+            int j = n - 1;
+
+            while (i < n && j >= 0)
+            {
+                if (i >= j)
+                {
+                    break;
+                }    
+
+                if (nums[i] % 2 != 0 && nums[j] % 2 == 0)
+                {
+                    int tmp = nums[i];
+                    nums[i] = nums[j];
+                    nums[j] = tmp;
+                    i++;
+                    j--;
+                }
+                else if (nums[i] % 2 != 0)
+                {
+                    j--;
+                }
+                else if (nums[j] % 2 == 0)
+                {
+                    i++;
+                }
+                else
+                {
+                    i++;
+                    j--;
+                }
+            }
+
+            return nums;
+        }
         #endregion
 
         #region Recursion
@@ -590,9 +659,9 @@ namespace LeetCode
 
         static void Main(string[] args)
         {
-            var array = new int[] { 400 };
+            var array = new int[] { 0, 1 };
 
-            ReplaceElements(array);
+            array = SortArrayByParity(array);
 
             PrintArray(array);
         }
