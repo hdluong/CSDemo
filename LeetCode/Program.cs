@@ -676,6 +676,34 @@ namespace LeetCode
 
             return result.Keys;
         }
+
+        /// <summary>
+        /// value: 1 -> N <=> index: 0 -> N-1
+        /// if have all values <=> have all index => all of array's values < 0
+        /// otherwise array's values > 0 (index x-1 chua duoc duyet) => x-1 = index <=> x = index + 1
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static IList<int> FindDisappearedNumbers1(int[] nums)
+        {
+            var result = new List<int>();
+
+            foreach (int x in nums)
+            {
+                var index = Math.Abs(x) - 1;
+                nums[index] = -1*Math.Abs(nums[index]);
+            }
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] > 0)
+                {
+                    result.Add(i + 1);
+                }
+            }
+
+            return result;
+        }
         #endregion
 
         #region Recursion
@@ -756,9 +784,9 @@ namespace LeetCode
 
         static void Main(string[] args)
         {
-            var array = new int[] { 1, 1 };
+            var array = new int[] { 2, 3, 4, 2 };
 
-            var result = FindDisappearedNumbers(array);
+            var result = FindDisappearedNumbers1(array);
 
             PrintArray(result.ToArray());
 
