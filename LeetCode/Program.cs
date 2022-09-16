@@ -706,6 +706,150 @@ namespace LeetCode
         }
         #endregion
 
+        #region Linked List
+        /// <summary>
+        /// 707. Design linked list
+        /// </summary>
+        public class MyLinkedList
+        {
+            public class Node
+            {
+                public int val;
+
+                public Node next;
+
+                public Node(int _val = 0, Node _next = null)
+                {
+                    val = _val;
+                    next = _next;
+                }
+            }
+
+            public Node head;
+
+            public MyLinkedList()
+            {
+                head = null;
+            }
+
+            public int Get(int index)
+            {
+                Node curNode = head;
+                int i = 0;
+                while (i != index && curNode != null)
+                {
+                    curNode = curNode.next;
+                    i++;
+                }
+
+                if (i == index && curNode != null)
+                {
+                    return curNode.val;
+                }
+
+                return -1;
+            }
+
+            public void AddAtHead(int val)
+            {
+                var curNode = new Node(val, head);
+                head = curNode;
+            }
+
+            public void AddAtTail(int val)
+            {
+                var curNode = new Node(val, null);
+                Node prevNode = null;
+                Node nextNode = head;
+                while (nextNode != null)
+                {
+                    prevNode = nextNode;
+                    nextNode = nextNode.next;
+                }
+
+                if (prevNode != null)
+                {
+                    prevNode.next = curNode;
+                }
+                else
+                {
+                    head = curNode;
+                }
+            }
+
+            /// <summary>
+            /// If index equals the length of the linked list, 
+            /// the node will be appended to the end of the linked list. 
+            /// If index is greater than the length, the node will not be inserted.
+            /// </summary>
+            /// <param name="index"></param>
+            /// <param name="val"></param>
+            public void AddAtIndex(int index, int val)
+            {
+                var curNode = new Node(val, null);
+                Node prevNode = null;
+                Node nextNode = head;
+                int i = 0;
+                while (i < index && nextNode != null)
+                {
+                    prevNode = nextNode;
+
+                    nextNode = nextNode.next;
+                    i++;
+                }
+
+                // add head
+                if (i == index && prevNode == null)
+                {
+                    curNode.next = head;
+                    head = curNode;
+                }
+                else if (i == index && nextNode != null)
+                {
+                    curNode.next = nextNode;
+                    prevNode.next = curNode;
+                }
+                // add tail
+                else if (i == index && nextNode == null)
+                {
+                    prevNode.next = curNode;
+                }
+            }
+
+            /// <summary>
+            /// Delete the indexth node in the linked list, if the index is valid.
+            /// </summary>
+            /// <param name="index"></param>
+            public void DeleteAtIndex(int index)
+            {
+                Node prevNode = null;
+                Node nextNode = head;
+
+                int i = 0;
+                while (i < index && nextNode != null)
+                {
+                    prevNode = nextNode;
+
+                    nextNode = nextNode.next;
+                    i++;
+                }
+
+                if (prevNode != null && nextNode != null)
+                {
+                    prevNode.next = nextNode.next;
+                }
+                else if (prevNode == null && nextNode != null)
+                {
+                    head = nextNode.next;
+                }
+                else if (prevNode == null)
+                {
+                    head = null;
+                }
+            }
+        }
+        #endregion
+
         #region Recursion
         public static int GiaiThua(int n)
         {
@@ -784,13 +928,33 @@ namespace LeetCode
 
         static void Main(string[] args)
         {
-            var array = new int[] { 2, 3, 4, 2 };
+            MyLinkedList obj = new MyLinkedList();
+            //obj.AddAtHead(7);
+            //obj.AddAtHead(2);
+            //obj.AddAtHead(1);
+            //obj.AddAtIndex(3, 0);
+            //obj.DeleteAtIndex(2);
+            //obj.AddAtHead(6);
+            //obj.AddAtTail(4);
+            //int param_1 = obj.Get(4);
+            //obj.AddAtHead(4);
+            //obj.AddAtIndex(5, 0);
+            //obj.AddAtHead(6);
 
-            var result = FindDisappearedNumbers1(array);
+            //obj.AddAtHead(1);
+            //obj.AddAtTail(3);
+            //obj.AddAtIndex(1, 2);
+            //int param_1 = obj.Get(1);
+            //obj.DeleteAtIndex(0);
+            //int param_2 = obj.Get(0);
 
-            PrintArray(result.ToArray());
+            //obj.AddAtIndex(0, 10);
+            //obj.AddAtIndex(0, 20);
+            //obj.AddAtIndex(1, 30);
+            //int param_1 = obj.Get(0);
 
-            //Console.WriteLine(ThirdMax(array));
+            obj.AddAtIndex(1, 0);
+            obj.Get(0);
         }
     }
 }
