@@ -179,5 +179,51 @@ namespace LeetCode
 
             return null;
         }
+
+        /// <summary>
+        /// 19. Remove Nth Node From End of List
+        /// </summary>
+        /// <param name="head"></param>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public static ListNode RemoveNthFromEnd(ListNode head, int n)
+        {
+            ListNode prev = null;
+            var s = head;
+            var f = head;
+            var k = n - 1;
+
+            while (f.next != null)
+            {
+                if (k != 0)
+                {
+                    f = f.next;
+                    k--;
+                    continue;
+                }
+
+                f = f.next;
+                prev = s;
+                s = s.next;
+            }
+
+            if (prev != null)
+            {
+                prev.next = s.next;
+            }
+            else
+            {
+                if (s == head)
+                {
+                    head = head.next;
+                }
+                else
+                {
+                    head = null;
+                }
+            }
+
+            return head;
+        }
     }
 }
