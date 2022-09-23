@@ -926,35 +926,35 @@ namespace LeetCode
         }
         #endregion
 
-        static void Main(string[] args)
-        {
-            MyLinkedList obj = new MyLinkedList();
-            //obj.AddAtHead(7);
-            //obj.AddAtHead(2);
-            //obj.AddAtHead(1);
-            //obj.AddAtIndex(3, 0);
-            //obj.DeleteAtIndex(2);
-            //obj.AddAtHead(6);
-            //obj.AddAtTail(4);
-            //int param_1 = obj.Get(4);
-            //obj.AddAtHead(4);
-            //obj.AddAtIndex(5, 0);
-            //obj.AddAtHead(6);
+        //static void Main(string[] args)
+        //{
+        //    MyLinkedList obj = new MyLinkedList();
+        //    //obj.AddAtHead(7);
+        //    //obj.AddAtHead(2);
+        //    //obj.AddAtHead(1);
+        //    //obj.AddAtIndex(3, 0);
+        //    //obj.DeleteAtIndex(2);
+        //    //obj.AddAtHead(6);
+        //    //obj.AddAtTail(4);
+        //    //int param_1 = obj.Get(4);
+        //    //obj.AddAtHead(4);
+        //    //obj.AddAtIndex(5, 0);
+        //    //obj.AddAtHead(6);
 
-            //obj.AddAtHead(1);
-            //obj.AddAtTail(3);
-            //obj.AddAtIndex(1, 2);
-            //int param_1 = obj.Get(1);
-            //obj.DeleteAtIndex(0);
-            //int param_2 = obj.Get(0);
+        //    //obj.AddAtHead(1);
+        //    //obj.AddAtTail(3);
+        //    //obj.AddAtIndex(1, 2);
+        //    //int param_1 = obj.Get(1);
+        //    //obj.DeleteAtIndex(0);
+        //    //int param_2 = obj.Get(0);
 
-            //obj.AddAtIndex(0, 10);
-            //obj.AddAtIndex(0, 20);
-            //obj.AddAtIndex(1, 30);
-            //int param_1 = obj.Get(0);
+        //    //obj.AddAtIndex(0, 10);
+        //    //obj.AddAtIndex(0, 20);
+        //    //obj.AddAtIndex(1, 30);
+        //    //int param_1 = obj.Get(0);
 
-            obj.AddAtIndex(1, 0);
-            obj.Get(0);
-        }
+        //    obj.AddAtIndex(1, 0);
+        //    obj.Get(0);
+        //}
     }
 }
