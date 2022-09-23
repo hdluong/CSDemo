@@ -278,20 +278,65 @@ namespace LeetCode
             return ReverseListInt(next, head);
         }
 
+        /// <summary>
+        /// 203. Remove Linked List Elements
+        /// Input: head = [1,2,6,6,3,4,5,6], val = 6
+        /// Output: [1,2,3,4,5]
+        /// </summary>
+        /// <param name="head"></param>
+        /// <param name="val"></param>
+        /// <returns></returns>
+        public static ListNode RemoveElements(ListNode head, int val)
+        {
+            ListNode prevNode = null;
+            var curNode = head;
+
+            while (curNode != null)
+            {
+                if (curNode.val == val)
+                {
+                    if (prevNode == null)
+                    {
+                        head = head.next;
+                        curNode = head;
+                    }
+                    else
+                    {
+                        prevNode.next = curNode.next;
+                        curNode = curNode.next;
+                    }
+
+                    continue;
+                }
+
+                prevNode = curNode;
+                curNode = curNode.next;
+            }
+
+            return head;
+        }
+
         static void Main(string[] args)
         {
+            // [1,2,6,6,3,4,5,6]
             ListNode head = new ListNode(1);
             var node1 = new ListNode(2);
-            var node2 = new ListNode(3);
-            var node3 = new ListNode(4);
-            var node4 = new ListNode(5);
+            var node2 = new ListNode(6);
+            var node3 = new ListNode(6);
+            var node4 = new ListNode(3);
+            var node5 = new ListNode(4);
+            var node6 = new ListNode(5);
+            var node7 = new ListNode(6);
 
             head.next = node1;
             node1.next = node2;
             node2.next = node3;
             node3.next = node4;
+            node4.next = node5;
+            node5.next = node6;
+            node6.next = node7;
 
-            var h = ReverseList(head);
+            var h = RemoveElements(head, 6);
         }
     }
 }
