@@ -364,6 +364,54 @@ namespace LeetCode
             return first;
         }
 
+        /// <summary>
+        /// 234. Palindrome Linked List
+        /// </summary>
+        /// <param name="head"></param>
+        /// <returns></returns>
+        public static bool IsPalindrome(ListNode head)
+        {
+            var curNode = head;
+            int n = 0;
+            while (curNode != null)
+            {
+                n++;
+                curNode = curNode.next;
+            }
+
+            int n1 = n / 2;
+            // reverse first part list
+            ListNode newHead = null;
+            while (n1 > 0)
+            {
+                ListNode next = head.next;
+                head.next = newHead;
+                newHead = head;
+                head = next;
+
+                n1--;
+            }
+
+            if (n % 2 != 0 && head != null)
+            {
+                head = head.next;    
+            }
+
+            // compare original list to reverse list
+            while (head != null && newHead != null)
+            {
+                if (head.val != newHead.val)
+                {
+                    return false;
+                }
+
+                newHead = newHead.next;
+                head = head.next;
+            }
+
+            return true;
+        }
+
         static void Main(string[] args)
         {
             // [1,2,6,6,3,4,5,6]
