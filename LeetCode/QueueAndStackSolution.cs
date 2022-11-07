@@ -167,31 +167,106 @@ namespace LeetCode
         }
     }
 
+    /// <summary>
+    /// 752. Open the Lock
+    /// </summary>
+    public class OpenTheLock
+    {
+        class PosTracker
+        {
+            private string position;
+            public string Position 
+            {
+                get
+                {
+                    return position;
+                }
+            }
+
+            private int moves;
+            public int Moves 
+            {
+                get
+                {
+                    return moves;
+                }
+            }
+
+            public PosTracker(string position, int moves)
+            {
+                this.position = position;
+                this.moves = moves;
+            }
+        }
+
+        private static List<string> GetChildren(string parent)
+        {
+            var result = new List<string>();
+
+            for (int i = 0; i < parent.Length; i++)
+            {
+                var num = Int32.Parse(parent[i].ToString());
+                var next_num = (num + 1) % 10;
+                var prev_num = (num - 1 + 10) % 10;
+
+                // ->
+                result.Add(parent.Substring(0, i) + next_num + parent.Substring(i + 1));
+                // <-
+                result.Add(parent.Substring(0, i) + prev_num + parent.Substring(i + 1));
+            }
+
+            return result;
+        }
+
+        public static int OpenLock(string[] deadends, string target)
+        {
+            if (deadends.Contains("0000"))
+            {
+                return -1;
+            }
+
+            var queue = new Queue<PosTracker>();
+            var visited = new HashSet<string>();
+
+            queue.Enqueue(new PosTracker("0000", 0));
+
+            foreach (var deadend in deadends)
+            {
+                visited.Add(deadend);
+            }
+
+            while (queue.Any())
+            {
+                var pt = queue.Dequeue();
+
+                if (pt.Position.Equals(target))
+                {
+                    return pt.Moves;
+                }
+
+                foreach (string child in GetChildren(pt.Position))
+                {
+                    if (!visited.Contains(child))
+                    {
+                        visited.Add(child);
+                        queue.Enqueue(new PosTracker(child, pt.Moves + 1));
+                    }
+                }
+            }
+
+            return -1;
+        }
+    }
+
     public class QueueAndStackSolution
     {
         public static void Main(string[] args)
         {
-            //MyCircularQueue obj = new MyCircularQueue(2);
-            //var param_1 = obj.EnQueue(4);
-            //var param_2 = obj.Rear();
-            //var param_3 = obj.EnQueue(9);
-            //var param_4 = obj.DeQueue();
-            //var param_5 = obj.Front();
-            //var param_6 = obj.DeQueue();
-            //var param_7 = obj.DeQueue();
-            //var param_8 = obj.IsEmpty();
-            //var param_9 = obj.DeQueue();
-            //var param_10 = obj.EnQueue(6);
-            //var param_11 = obj.EnQueue(4);
+            var deadends = new string[] { "0201", "0101", "0102", "1212", "2002" };
+            var target = "0202";
 
-            var grid = new char[,] {
-                { '1', '1', '0', '0', '0' },
-                { '1', '1', '0', '1', '0' },
-                { '1', '1', '0', '0', '0' },
-                { '0', '0', '0', '0', '0' }
-            };
-
-            Console.WriteLine($"Number of island: {NumberIslands.NumIslands(grid)}");
+            var numOfTurns = OpenTheLock.OpenLock(deadends, target);
+            Console.WriteLine($"Number of turns: {numOfTurns}");
         }
     }
 }
