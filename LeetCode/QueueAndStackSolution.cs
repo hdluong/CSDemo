@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace LeetCode
 {
+    #region Queue
     /// <summary>
     /// 622. Design Circular Queue
     /// </summary>
@@ -357,13 +358,92 @@ namespace LeetCode
             return count;
         }
     }
+    #endregion
+
+    #region Stack
+    /// <summary>
+    /// 155. Min Stack
+    /// </summary>
+    public class MinStack
+    {
+        class Stack
+        {
+            public int val { get; set; }
+            public int min { get; set; }
+
+            public Stack(int _val = 0, int _min = 0)
+            {
+                val = _val;
+                min = _min;
+            }
+        }
+
+        private List<Stack> data;
+
+
+        public MinStack()
+        {
+            data = new List<Stack>();
+        }
+
+        public bool IsEmpty()
+        {
+            return data.Count == 0;
+        }
+
+        public void Push(int val)
+        {
+            if (IsEmpty())
+            {
+                data.Add(new Stack(val, val));
+            }
+            else
+            {
+                var min = Math.Min(val, GetMin());
+                data.Add(new Stack(val, min));
+            }
+        }
+
+        public void Pop()
+        {
+            if (!IsEmpty())
+            {
+                data.RemoveAt(data.Count - 1);
+            }
+        }
+
+        public int Top()
+        {
+            if (IsEmpty())
+            {
+                return -1;
+            }
+
+            return data[data.Count - 1].val;
+        }
+
+        public int GetMin()
+        {
+            if (IsEmpty())
+            {
+                return -1;
+            }
+
+            return data[data.Count - 1].min;
+        }
+    }
+    #endregion
 
     public class QueueAndStackSolution
     {
         public static void Main(string[] args)
         {
-            var count = PerfectSquares.NumSquares1(12);
-            Console.WriteLine($"number of perfect squares: {count}");
+            var obj = new MinStack();
+            obj.Push(-2);
+            obj.Push(0);
+            obj.Push(-1);
+
+            var min = obj.GetMin();
         }
     }
 }
