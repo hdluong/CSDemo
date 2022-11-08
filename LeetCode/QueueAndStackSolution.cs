@@ -432,18 +432,53 @@ namespace LeetCode
             return data[data.Count - 1].min;
         }
     }
+
+    /// <summary>
+    /// 20. Valid Parentheses
+    /// </summary>
+    public class ValidParentheses
+    {
+        public static bool IsValid(string s)
+        {
+            if (s.Length % 2 != 0)
+            {
+                return false;
+            }
+
+            var stack = new Stack<char>();
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                switch (s[i])
+                {
+                    case '(':
+                        stack.Push(')');
+                        break;
+                    case '{':
+                        stack.Push('}');
+                        break;
+                    case '[':
+                        stack.Push(']');
+                        break;
+                    default:
+                        if (stack.Count == 0 || stack.Pop() != s[i])
+                        {
+                            return false;
+                        }
+                        break;
+                }
+            }
+
+            return stack.Count == 0;
+        }
+    }
     #endregion
 
     public class QueueAndStackSolution
     {
         public static void Main(string[] args)
         {
-            var obj = new MinStack();
-            obj.Push(-2);
-            obj.Push(0);
-            obj.Push(-1);
-
-            var min = obj.GetMin();
+            ValidParentheses.IsValid("()]]");
         }
     }
 }
