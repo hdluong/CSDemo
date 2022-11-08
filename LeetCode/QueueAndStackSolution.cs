@@ -258,15 +258,74 @@ namespace LeetCode
         }
     }
 
+    /// <summary>
+    /// 279. Perfect squares
+    /// </summary>
+    public class PerfectSquares
+    {
+        class Tracker
+        {
+            public int Num { get; set; }
+
+            public int Steps { get; set; }
+
+            public Tracker(int num, int steps)
+            {
+                Num = num;
+                Steps = steps;
+            }
+        }
+
+        private static List<int> GetChildren(int n)
+        {
+            var result = new List<int>();
+            var maxSquare = (int)Math.Sqrt(n);
+
+            for (int i = 1; i <= maxSquare; i++)
+            {
+                result.Add(n - i * i);
+            }
+
+            return result;
+        }
+
+        public static int NumSquares(int n)
+        {
+            var queue = new Queue<Tracker>();
+            var visited = new HashSet<int>();
+
+            queue.Enqueue(new Tracker(n, 0));
+            visited.Add(n);
+
+            while (queue.Any())
+            {
+                var x = queue.Dequeue();
+
+                if (x.Num == 0)
+                {
+                    return x.Steps;
+                }
+
+                foreach (var child in GetChildren(x.Num))
+                {
+                    if (!visited.Contains(child))
+                    {
+                        queue.Enqueue(new Tracker(child, x.Steps + 1));
+                        visited.Add(child);
+                    }
+                }
+            }
+
+            return 0;
+        }
+    }
+
     public class QueueAndStackSolution
     {
         public static void Main(string[] args)
         {
-            var deadends = new string[] { "0201", "0101", "0102", "1212", "2002" };
-            var target = "0202";
-
-            var numOfTurns = OpenTheLock.OpenLock(deadends, target);
-            Console.WriteLine($"Number of turns: {numOfTurns}");
+            var count = PerfectSquares.NumSquares(13);
+            Console.WriteLine($"number of perfect squares: {count}");
         }
     }
 }
