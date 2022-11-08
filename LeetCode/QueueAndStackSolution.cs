@@ -318,13 +318,51 @@ namespace LeetCode
 
             return 0;
         }
+
+        public static int NumSquares1(int n)
+        {
+            var count = 0;
+            var queue = new Queue<int>();
+            var visited = new HashSet<int>();
+
+            queue.Enqueue(n);
+            visited.Add(n);
+
+            while (queue.Any())
+            {
+                var size = queue.Count;
+
+                for (int i = 0; i < size; i++)
+                {
+                    var x = queue.Dequeue();
+
+                    if (x == 0)
+                    {
+                        return count;
+                    }
+
+                    foreach (var child in GetChildren(x))
+                    {
+                        if (!visited.Contains(child))
+                        {
+                            queue.Enqueue(child);
+                            visited.Add(child);
+                        }
+                    }
+                }
+
+                count++;
+            }
+
+            return count;
+        }
     }
 
     public class QueueAndStackSolution
     {
         public static void Main(string[] args)
         {
-            var count = PerfectSquares.NumSquares(13);
+            var count = PerfectSquares.NumSquares1(12);
             Console.WriteLine($"number of perfect squares: {count}");
         }
     }
