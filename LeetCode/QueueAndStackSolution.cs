@@ -472,13 +472,73 @@ namespace LeetCode
             return stack.Count == 0;
         }
     }
+
+    /// <summary>
+    /// 739. Daily Temperatures
+    /// </summary>
+    public class DailyTemperatures
+    {
+        class Pair
+        {
+            public int Index { get; set; }
+
+            public int Value { get; set; }
+
+            public Pair(int index, int val)
+            {
+                this.Index = index;
+                this.Value = val;
+            }
+        }
+
+        // Input: temperatures = [73,74,75,71,69,72,76,73]
+        // Output: [1,1,4,2,1,1,0,0]
+        public static int[] DayToGetWammer(int[] temperatures)
+        {
+            var result = new int[temperatures.Length];
+            var stack = new Stack<Pair>();
+
+            for (var i = 0; i < temperatures.Length; i++)
+            {
+                while (stack.Any() && temperatures[i] > stack.Peek().Value)
+                {
+                    var item = stack.Pop();
+                    result[item.Index] = i - item.Index;
+                }
+
+                stack.Push(new Pair(i, temperatures[i]));
+            }
+
+            return result;
+        }
+
+        public static int[] DailyTemperatures1(int[] temperatures)
+        {
+            var result = new int[temperatures.Length];
+            var stack = new Stack<int>();
+
+            for (var i = 0; i < temperatures.Length; i++)
+            {
+                while (stack.Any() && temperatures[i] > temperatures[stack.Peek()])
+                {
+                    var index = stack.Pop();
+                    result[index] = i - index;
+                }
+
+                stack.Push(i);
+            }
+
+            return result;
+        }
+    }
     #endregion
 
     public class QueueAndStackSolution
     {
         public static void Main(string[] args)
         {
-            ValidParentheses.IsValid("()]]");
+            var temp = new int[] { 73, 74, 75, 71, 69, 72, 76, 73 };
+            var res = DailyTemperatures.DailyTemperatures1(temp);
         }
     }
 }

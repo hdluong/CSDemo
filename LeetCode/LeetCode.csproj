@@ -5,4 +5,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="QueueAndStackSolution.cs~RF1d8e79e2.TMP" />
+  </ItemGroup>
+
 </Project>
