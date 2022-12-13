@@ -531,6 +531,50 @@ namespace LeetCode
             return result;
         }
     }
+
+    /// <summary>
+    /// 150. Evaluate Reverse Polish Notation
+    /// </summary>
+    public class RPolishNotation
+    {
+        public int EvalRPN(string[] tokens)
+        {
+            int x, y;
+            var stack = new Stack<int>();
+
+            foreach (var item in tokens)
+            {
+                switch (item)
+                {
+                    case "+":
+                        x = stack.Pop();
+                        y = stack.Pop();
+                        stack.Push(y + x);
+                        break;
+                    case "-":
+                        x = stack.Pop();
+                        y = stack.Pop();
+                        stack.Push(y - x);
+                        break;
+                    case "*":
+                        x = stack.Pop();
+                        y = stack.Pop();
+                        stack.Push(y * x);
+                        break;
+                    case "/":
+                        x = stack.Pop();
+                        y = stack.Pop();
+                        stack.Push(y/x);
+                        break;
+                    default:
+                        stack.Push(Int32.Parse(item));
+                        break;
+                }
+            }
+
+            return stack.Peek();
+        }
+    }
     #endregion
 
     public class QueueAndStackSolution
