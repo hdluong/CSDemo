@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <StartupObject>DesignPattern.BehavioralPatterns.StrategyPattern.Demo2.Client</StartupObject>
+    <StartupObject>DesignPattern.CreationalPatterns.SingletonPattern.Program</StartupObject>
   </PropertyGroup>
 
 </Project>
