@@ -20,5 +20,10 @@ namespace DesignPattern.CreationalPatterns.FactoryMethodPattern.Demo2.Manager
         {
             return "Contract employee";
         }
+
+        public decimal GetMedicalAllowance()
+        {
+            return 100m;
+        }
     }
 }

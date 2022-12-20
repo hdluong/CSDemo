@@ -1,4 +1,4 @@
-﻿using DesignPattern.CreationalPatterns.FactoryMethodPattern.Demo2.Factory;
+﻿using DesignPattern.CreationalPatterns.FactoryMethodPattern.Demo2.Factory.FactoryMethod;
 using DesignPattern.CreationalPatterns.FactoryMethodPattern.Demo2.Manager;
 using System;
 using System.Collections.Generic;
@@ -15,16 +15,22 @@ namespace DesignPattern.CreationalPatterns.FactoryMethodPattern.Demo2
                 new Employee(EmployeeType.Contract),
                 new Employee(EmployeeType.Permanent),
                 new Employee(EmployeeType.Contract),
+                new Employee(EmployeeType.Permanent),
             };
 
+            Console.WriteLine($"Employee details: ");
             foreach (var emp in employeeLst)
             {
-                IEmployeeManager empManager = EmployeeManagerFactory.CreateEmployeeManager(emp.EmployeeType);
-                emp.Bonus = empManager.GetBonus();
-                emp.HourlyPay = empManager.GetPay();
+                BaseEmployeeFactory empFactory = EmployeeManagerFactory.CreateFactory(emp);
+                empFactory.ApplySalary();
 
-                Console.WriteLine($"Employee details: Bonus {emp.Bonus} - Pay (hourly) {emp.HourlyPay} - " +
-                    $"employee type {empManager.GetEmployeeType()}");
+                Console.WriteLine("===============================================");
+                Console.WriteLine($"employee type: {emp.EmployeeTypeTxt}");
+                Console.WriteLine($"Bonus: {emp.Bonus}");
+                Console.WriteLine($"Pay (hourly): {emp.HourlyPay}");
+                Console.WriteLine($"House Allowance: {emp.HouseAllowance}");
+                Console.WriteLine($"Medical Allowance: {emp.MedicalAllowance}");
+                Console.WriteLine("===============================================");
             }
         }
     }

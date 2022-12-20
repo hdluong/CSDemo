@@ -20,5 +20,10 @@ namespace DesignPattern.CreationalPatterns.FactoryMethodPattern.Demo2.Manager
         {
             return "Permanent employee";
         }
+
+        public decimal GetHouseAllowance()
+        {
+            return 120m;
+        }
     }
 }

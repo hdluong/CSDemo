@@ -22,6 +22,8 @@ namespace DesignPattern.CreationalPatterns.FactoryMethodPattern.Demo2
 
         public EmployeeType EmployeeType { get; set; }
 
+        public string EmployeeTypeTxt { get; set; }
+
         public Employee(EmployeeType type)
         {
             EmployeeType = type;
