@@ -3,7 +3,11 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <StartupObject>DesignPattern.CreationalPatterns.SingletonPattern.Program</StartupObject>
+    <StartupObject>DesignPattern.CreationalPatterns.FactoryMethodPattern.Demo2.Program</StartupObject>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="StructuralPatterns\DecoratorPattern\" />
+  </ItemGroup>
 
 </Project>
