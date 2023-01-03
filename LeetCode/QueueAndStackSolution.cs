@@ -632,6 +632,53 @@ namespace LeetCode
             }
         }
     }
+
+    /// <summary>
+    /// 733. Flood Fill
+    /// </summary>
+    public class FloodFill
+    {
+        private static readonly int[,] DIRECTIONS = { { -1, 0 }, { 0, 1 }, { 1, 0 }, { 0, -1 } };
+
+        public int[,] Fill(int[,] image, int sr, int sc, int color)
+        {
+            if (image[sr, sc] == color)
+            {
+                return image;
+            }
+
+            var rows = image.GetLength(0);
+            var cols = image.GetLength(1);
+
+            var stack = new Stack<int>();
+            stack.Push(sr * cols + sc);
+            var beforeColor = image[sr, sc];
+            image[sr, sc] = color;
+
+            while(stack.Any())
+            {
+                var index = stack.Pop();
+                var row = index / cols;
+                var col = index % cols;
+
+                for (int i = 0; i < 4; i++)
+                {
+                    var x = row + DIRECTIONS[i, 0];
+                    var y = col + DIRECTIONS[i, 1];
+
+                    if (x > -1 && x < rows &&
+                        y > -1 && y < cols &&
+                        image[x, y] == beforeColor)
+                    {
+                        stack.Push(x * cols + y);
+                        image[x, y] = color;
+                    }
+                }
+            }
+
+            return image;
+        }
+    }
     #endregion
 
     public class QueueAndStackSolution
