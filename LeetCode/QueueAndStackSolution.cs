@@ -575,13 +575,78 @@ namespace LeetCode
             return stack.Peek();
         }
     }
+
+    public class DFS
+    {
+        private static readonly int[,] DIRECTIONS = { { -1, 0 }, { 0, 1 }, { 1, 0 }, { 0, -1 } };
+
+        public static int NumIslands(char[,] grid)
+        {
+            var count = 0;
+            var rows = grid.GetLength(0);
+            var cols = grid.GetLength(1);
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    if (grid[i, j] == '1')
+                    {
+                        count++;
+                        fillWithWater(grid, rows, cols, i, j);
+                    }
+                }
+            }
+
+            return count;
+        }
+
+        public static void fillWithWater(char[,] grid, int rows, int cols, int i, int j)
+        {
+            var stack = new Stack<int>();
+
+            // 2D -> 1D: index = row * cols + col
+            // 1D -> 2D: R = index / cols, C = index % cols
+            stack.Push(i * cols + j);
+            grid[i, j] = '0';
+
+            while (stack.Any())
+            {
+                var index = stack.Pop();
+                var row = index / cols;
+                var col = index % cols;
+
+                for (int k = 0; k < 4; k++)
+                {
+                    var x = row + DIRECTIONS[k, 0];
+                    var y = col + DIRECTIONS[k, 1];
+
+                    if (x >= 0 && x < rows &&
+                        y >= 0 && y < cols &&
+                        grid[x, y] == '1')
+                    {
+                        stack.Push(x * cols + y);
+                        grid[x, y] = '0';
+                    }
+                }
+            }
+        }
+    }
     #endregion
 
     public class QueueAndStackSolution
     {
         public static void Main(string[] args)
         {
-            
+            var grid = new char[,]
+            {
+                { '1', '1', '1', '1', '0' },
+                { '1', '1', '0', '1', '0' },
+                { '1', '1', '1', '0', '0' },
+                { '0', '0', '0', '0', '0' }
+            };
+
+            Console.WriteLine($"Num of island: {DFS.NumIslands(grid)}");
         }
     }
 }
