@@ -679,21 +679,66 @@ namespace LeetCode
             return image;
         }
     }
+
+    /// <summary>
+    /// 394. Decode String
+    /// </summary>
+    public class DecodeString
+    {
+        public static string Decode(string s)
+        {
+            var word = new StringBuilder();
+            var numStr = new StringBuilder();
+
+            var wordStack = new Stack<string>();
+            var numStack = new Stack<int>();
+
+            foreach (var c in s)
+            {
+                switch (c)
+                {
+                    case ']':
+                        var num = numStack.Pop();
+                        var duplicateWord = word.ToString();
+                        for (int i = 1; i < num; i++)
+                        {
+                            word.Append(duplicateWord);
+                        }
+
+                        word.Insert(0, wordStack.Pop());
+                        break;
+                    case '[':
+                        numStack.Push(Int32.Parse(numStr.ToString()));
+                        wordStack.Push(word.ToString());
+
+                        numStr.Clear();
+                        word.Clear();
+                        break;
+                    default:
+                        if (Char.IsDigit(c))
+                        {
+                            numStr.Append(c);
+                        }
+                        else
+                        {
+                            word.Append(c);
+                        }
+                        break;
+                }
+            }
+
+            return word.ToString();
+        }
+    }
     #endregion
 
     public class QueueAndStackSolution
     {
         public static void Main(string[] args)
         {
-            var grid = new char[,]
-            {
-                { '1', '1', '1', '1', '0' },
-                { '1', '1', '0', '1', '0' },
-                { '1', '1', '1', '0', '0' },
-                { '0', '0', '0', '0', '0' }
-            };
+            var s = "100[leetcode]";
 
-            Console.WriteLine($"Num of island: {DFS.NumIslands(grid)}");
+            Console.WriteLine(DecodeString.Decode(s));
         }
     }
 }
