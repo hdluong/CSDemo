@@ -763,14 +763,83 @@ namespace LeetCode
     }
     #endregion
 
+    #region Binary Tree
+    /// <summary>
+    /// Definition for a binary tree node
+    /// </summary>
+    public class TreeNode
+    {
+        public int val;
+        public TreeNode left;
+        public TreeNode right;
+
+        public TreeNode(int val= 0, TreeNode left = null, TreeNode right = null)
+        {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+    /// <summary>
+    /// 144. Binary Tree Preorder Traversal
+    /// </summary>
+    public class TreePreorderTraversal
+    {
+        private IList<int> answer = new List<int>();
+
+        private void RecursionDfs(TreeNode root)
+        {
+            if (root == null)
+            {
+                return;
+            }
+
+            answer.Add(root.val);
+            RecursionDfs(root.left);
+            RecursionDfs(root.right);
+        }
+
+        public IList<int> PreorderTraversal(TreeNode root)
+        {
+            RecursionDfs(root);
+
+            return answer;
+        }
+
+        public IList<int> IterationDfs(TreeNode root)
+        {
+            var orders = new List<int>();
+
+            var stack = new Stack<TreeNode>();
+            stack.Push(root);
+
+            while (stack.Any())
+            {
+                var node = stack.Pop();
+
+                if (node != null)
+                {
+                    orders.Add(node.val);
+                    stack.Push(node.right);
+                    stack.Push(node.left);
+                }
+            }
+
+            return orders;
+        }
+    }
+    #endregion
+
     public class QueueAndStackSolution
     {
         public static void Main(string[] args)
         {
-            int[] nums = { 1 };
-            var target = 1;
+            var node3 = new TreeNode(3, null, null);
+            var node2 = new TreeNode(2, node3, null);
+            var root = new TreeNode(1, null, node2);
 
-            Console.WriteLine(TargetSum.FindTargetSumWays(nums, target));
+            var result = new TreePreorderTraversal().IterationDfs(root);
         }
     }
 }
