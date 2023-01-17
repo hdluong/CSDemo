@@ -730,15 +730,47 @@ namespace LeetCode
             return word.ToString();
         }
     }
+
+    /// <summary>
+    /// 494. Target Sum
+    /// </summary>
+    public class TargetSum
+    {
+        public static int FindTargetSumWays(int[] nums, int target)
+        {
+            int count = 0;
+
+            CalculateSum(nums, 0, 0, target, ref count);
+
+            return count;
+        }
+
+        public static void CalculateSum(int[] nums, int i, int sum, int target, ref int count)
+        {
+            if (i == nums.Length)
+            {
+                if (sum == target)
+                {
+                    count++;
+                }
+            }
+            else
+            {
+                CalculateSum(nums, i + 1, sum + nums[i], target, ref count);
+                CalculateSum(nums, i + 1, sum - nums[i], target, ref count);
+            }
+        }
+    }
     #endregion
 
     public class QueueAndStackSolution
     {
         public static void Main(string[] args)
         {
-            var s = "100[leetcode]";
+            int[] nums = { 1 };
+            var target = 1;
 
-            Console.WriteLine(DecodeString.Decode(s));
+            Console.WriteLine(TargetSum.FindTargetSumWays(nums, target));
         }
     }
 }
