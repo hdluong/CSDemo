@@ -909,6 +909,49 @@ namespace LeetCode
             return res;
         }
     }
+
+    /// <summary>
+    /// 102. Binary Tree Level Order Traversal
+    /// </summary>
+    public class TreeLevelOrderTraversal
+    {
+        public IList<IList<int>> LevelOrder(TreeNode root)
+        {
+            var res = new List<IList<int>>();
+
+            Bfs(root, res);
+
+            return res;
+        }
+
+        public void Bfs(TreeNode root, IList<IList<int>> res)
+        {
+            var queue = new Queue<TreeNode>();
+            queue.Enqueue(root);
+
+            while (queue.Any())
+            {
+                var level = new List<int>();
+                var size = queue.Count;
+
+                for (int i = 0; i < size; i++)
+                {
+                    var node = queue.Dequeue();
+                    if (node != null)
+                    {
+                        level.Add(node.val);
+                        queue.Enqueue(node.left);
+                        queue.Enqueue(node.right);
+                    }
+                }
+
+                if (level.Any())
+                {
+                    res.Add(level);
+                }
+            }
+        }
+    }
     #endregion
 
     public class QueueAndStackSolution
@@ -921,7 +964,7 @@ namespace LeetCode
             var node2 = new TreeNode(2, node3, null);
             var root = new TreeNode(1, node5, node2);
 
-            var result = new TreePostorderTraversal().Recursion(root);
+            var result = new TreeLevelOrderTraversal().LevelOrder(root);
         }
     }
 }
