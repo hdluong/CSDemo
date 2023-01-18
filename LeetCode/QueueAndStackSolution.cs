@@ -829,17 +829,65 @@ namespace LeetCode
             return orders;
         }
     }
+
+    /// <summary>
+    /// 94. Binary Tree Inorder Traversal
+    /// </summary>
+    public class TreeInorderTraversal
+    {
+        public IList<int> Iteration(TreeNode root)
+        {
+            var answer = new List<int>();
+            var stack = new Stack<TreeNode>();
+
+            var curr = root;
+
+            while (curr != null || stack.Any())
+            {
+                while (curr != null)
+                {
+                    stack.Push(curr);
+                    curr = curr.left;
+                }
+
+                curr = stack.Pop();
+                answer.Add(curr.val);
+                curr = curr.right;
+            }
+
+            return answer;
+        }
+
+        public List<int> Recursion(TreeNode root)
+        {
+            var res = new List<int>();
+            Helper(root, res);
+            return res;
+        }
+
+        public void Helper(TreeNode root, List<int> res)
+        {
+            if (root != null)
+            {
+                Helper(root.left, res);
+                res.Add(root.val);
+                Helper(root.right, res);
+            }
+        }
+    }
     #endregion
 
     public class QueueAndStackSolution
     {
         public static void Main(string[] args)
         {
+            var node5 = new TreeNode(5, null, null);
+
             var node3 = new TreeNode(3, null, null);
             var node2 = new TreeNode(2, node3, null);
-            var root = new TreeNode(1, null, node2);
+            var root = new TreeNode(1, node5, node2);
 
-            var result = new TreePreorderTraversal().IterationDfs(root);
+            var result = new TreeInorderTraversal().Recursion(root);
         }
     }
 }
