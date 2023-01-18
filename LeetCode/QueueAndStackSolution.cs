@@ -875,6 +875,40 @@ namespace LeetCode
             }
         }
     }
+
+    /// <summary>
+    /// 145. Binary Tree Postorder Traversal
+    /// </summary>
+    public class TreePostorderTraversal
+    {
+        public List<int> Recursion(TreeNode root)
+        {
+            var res = new List<int>();
+            Helper(root, res);
+            return res;
+        }
+
+        public void Helper(TreeNode root, List<int> res)
+        {
+            if (root != null)
+            {
+                Helper(root.left, res);
+                Helper(root.right, res);
+                res.Add(root.val);
+            }
+        }
+
+        public List<int> Iteration(TreeNode root)
+        {
+            var res = new List<int>();
+            var stack = new Stack<TreeNode>();
+
+            // TODO
+            //
+
+            return res;
+        }
+    }
     #endregion
 
     public class QueueAndStackSolution
@@ -887,7 +921,7 @@ namespace LeetCode
             var node2 = new TreeNode(2, node3, null);
             var root = new TreeNode(1, node5, node2);
 
-            var result = new TreeInorderTraversal().Recursion(root);
+            var result = new TreePostorderTraversal().Recursion(root);
         }
     }
 }
